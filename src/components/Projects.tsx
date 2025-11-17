@@ -1,4 +1,5 @@
-import { ExternalLink, Github, Code2 } from 'lucide-react';
+import { ExternalLink, Github, Code2, MoveRight } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
 
 const Projects = () => {
   const githubProjects = [
@@ -33,79 +34,126 @@ const Projects = () => {
   ];
 
   const languageColors: { [key: string]: string } = {
-    Python: 'bg-blue-500',
+    Python: 'bg-green-500',
     JavaScript: 'bg-yellow-500',
     Java: 'bg-red-500'
   };
+  
+  // Framer Motion Variants for Staggered Animation
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1, 
+      transition: { 
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      } 
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } },
+  };
 
   return (
-    <section id="projects" className="py-20 bg-white">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="py-24 bg-white text-slate-900"> {/* Increased padding */}
+      <motion.div 
+        className="container mx-auto px-6"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-slate-900 mb-4 text-center">Projects</h2>
-          <p className="text-slate-600 text-center mb-12 max-w-2xl mx-auto">
-            A collection of my work spanning DevOps automation, web development, and software engineering
-          </p>
+          <motion.h2 
+            variants={itemVariants}
+            className="text-5xl font-extrabold text-center mb-6 font-sans tracking-tight 
+                       bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-indigo-800"
+          >
+            My Projects
+          </motion.h2>
+          <motion.p 
+            variants={itemVariants}
+            className="text-lg text-slate-600 text-center mb-16 max-w-2xl mx-auto font-light"
+          >
+            A collection of my work spanning DevOps automation, web development, and software engineering.
+          </motion.p>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-10">
             {githubProjects.map((project, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-slate-50 rounded-xl p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-200"
+                variants={itemVariants}
+                whileHover={{ 
+                    scale: 1.03, 
+                    boxShadow: "0 15px 30px rgba(59, 130, 246, 0.15)", // Accent shadow for hover
+                    y: -5 
+                }}
+                whileTap={{ scale: 0.98 }}
+                className="relative bg-slate-50 rounded-2xl p-8 shadow-md transition-all duration-300 ease-out 
+                           border border-slate-100 flex flex-col justify-between"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center">
-                    <Code2 className="text-slate-700 mr-2" size={24} />
-                    <h3 className="text-xl font-bold text-slate-900">{project.name}</h3>
-                  </div>
-                  <div className="flex space-x-2">
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors"
-                      title="View on GitHub"
-                    >
-                      <Github size={18} />
-                    </a>
-                  </div>
+                <div>
+                    <div className="flex items-start justify-between mb-4">
+                        <div className="flex items-center">
+                            <Code2 className="text-blue-600 mr-3" size={24} />
+                            <h3 className="text-xl font-bold text-slate-900 font-sans">{project.name}</h3>
+                        </div>
+                        <a
+                            href={project.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition-colors"
+                            title="View on GitHub"
+                        >
+                            <Github size={18} />
+                        </a>
+                    </div>
+
+                    <p className="text-slate-700 mb-5 leading-relaxed flex-grow">{project.description}</p>
                 </div>
 
-                <p className="text-slate-700 mb-4 leading-relaxed">{project.description}</p>
+                <div className="mt-4">
+                    <div className="flex items-center mb-4">
+                        <span className={`w-3 h-3 rounded-full ${languageColors[project.language]} mr-2`}></span>
+                        <span className="text-sm text-slate-600 font-medium font-mono">{project.language}</span>
+                    </div>
 
-                <div className="flex items-center mb-4">
-                  <span className={`w-3 h-3 rounded-full ${languageColors[project.language]} mr-2`}></span>
-                  <span className="text-sm text-slate-600 font-medium">{project.language}</span>
+                    <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, techIndex) => (
+                            <span
+                                key={techIndex}
+                                className="px-3 py-1 bg-white text-slate-700 text-xs font-medium rounded-full border border-blue-300/50 
+                                           shadow-sm hover:bg-blue-50 transition-colors" // Enhanced tags
+                            >
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
                 </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-white text-slate-700 text-xs font-medium rounded-full border border-slate-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
-            <a
+          <div className="mt-20 text-center">
+            <motion.a
               href="https://github.com/starlight1805"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors"
+              className="inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-700 
+                         text-white text-lg font-semibold rounded-full shadow-xl hover:shadow-2xl 
+                         transform hover:scale-[1.02] transition-all duration-300"
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(59, 130, 246, 0.5)" }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Github size={20} />
+              <Github size={22} />
               <span>View More on GitHub</span>
-              <ExternalLink size={18} />
-            </a>
+              <ExternalLink size={20} />
+            </motion.a>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
