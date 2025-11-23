@@ -19,56 +19,6 @@ I specialize in:
 
 ---
 
-## 🌟 Website Highlights
-
-| Feature | Description |
-|--------|-------------|
-| ⚡ Super-smooth animations | Powered by Framer Motion |
-| 🧭 Floating dock navigation | Mac-style bottom navbar on desktop |
-| 📱 Fully responsive | Mobile-first, adaptive layouts |
-| 🎯 Recruiter-friendly sections | Skills, experience, projects, resume |
-| ✨ Eye-catching UI | Glassmorphism, gradients, neon glows |
-| 🔍 SEO optimized | OG tags, social preview thumbnail |
-| ☁ Hosted on Firebase | Fast global delivery |
-
----
-
-## 🛠 Tech Stack
-
-| Category | Technologies |
-|---------|--------------|
-| Framework | React + TypeScript + Vite |
-| Styling | TailwindCSS |
-| Animations | Framer Motion |
-| Icons | Lucide-React |
-| Deployment | Firebase Hosting |
-
----
-
-## 📂 Project Structure
-
-portfolio-2025/
-├── public/
-│ ├── social-preview.jpg
-│ ├── profile-favicon.jpg
-│ └── resume.pdf
-├── src/
-│ ├── components/
-│ │ ├── Hero.tsx
-│ │ ├── About.tsx
-│ │ ├── Experience.tsx
-│ │ ├── Projects.tsx
-│ │ ├── Skills.tsx
-│ │ ├── Contact.tsx
-│ │ └── Navigation.tsx
-│ ├── images/
-│ │ └── Image2.jpg
-│ ├── App.tsx
-│ ├── main.tsx
-│ └── index.css
-├── package.json
-└── vite.config.ts
-
 
 📬 Contact
 
