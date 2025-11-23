@@ -1,5 +1,5 @@
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
-import ProfileImage from '../images/Image1.jpg'; 
+import ProfileImage from '../images/Image2.jpg'; 
 import { motion, Variants } from 'framer-motion'; 
 
 const Hero = () => {
