@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "vivek-varkala-portfolio-2025",
+    "prod": "vivekvarkala-portfolio"
+  },
+  "targets": {},
+  "etags": {}
+}

@@ -1,25 +1,36 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Home, User, Briefcase, Code, Terminal, Mail, LucideIcon } from 'lucide-react';
-import { motion, AnimatePresence, Variants } from 'framer-motion'; // <-- Import Variants
+import {
+  Menu,
+  X,
+  Home,
+  User,
+  Briefcase,
+  Code,
+  Terminal,
+  Mail,
+  LucideIcon,
+  FileText,
+} from 'lucide-react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 interface NavigationProps {
   activeSection: string;
 }
 
-// Define the structure for navigation items, including the LucideIcon type
 interface NavItem {
-    id: string;
-    label: string;
-    Icon: LucideIcon;
+  id: string;
+  label: string;
+  Icon: LucideIcon;
 }
 
 const Navigation = ({ activeSection }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Lock the scroll when the mobile menu is open
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [isMobileMenuOpen]);
 
   const navItems: NavItem[] = [
@@ -28,7 +39,7 @@ const Navigation = ({ activeSection }: NavigationProps) => {
     { id: 'experience', label: 'Experience', Icon: Briefcase },
     { id: 'projects', label: 'Projects', Icon: Code },
     { id: 'skills', label: 'Skills', Icon: Terminal },
-    { id: 'contact', label: 'Contact', Icon: Mail }
+    { id: 'contact', label: 'Contact', Icon: Mail },
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -39,31 +50,29 @@ const Navigation = ({ activeSection }: NavigationProps) => {
     }
   };
 
-  // ------------------------------------------------------------------
-  // FIX APPLIED: Using 'as const' on the entire variants object
-  // ------------------------------------------------------------------
   const mobileMenuVariants = {
     hidden: { opacity: 0, x: '100%' },
-    visible: { 
-        opacity: 1, 
-        x: 0, 
-        transition: { 
-            type: 'spring', 
-            stiffness: 80, 
-            damping: 15 
-        } 
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 80,
+        damping: 15,
+      },
     },
-    exit: { opacity: 0, x: '100%' }
-  } as const; // <-- This resolves the TypeScript error
+    exit: { opacity: 0, x: '100%' },
+  } as const;
 
   return (
     <>
-      {/* 1. Desktop: Floating Dock Navigation (Trendy and Unique) */}
-      <nav 
-        className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 hidden md:flex 
-                   bg-slate-800/60 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl shadow-cyan-500/10 p-2"
+      {/* Desktop: Floating Dock Navigation */}
+      <nav
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex 
+                   bg-slate-800/60 backdrop-blur-xl border border-white/10 rounded-full 
+                   shadow-2xl shadow-cyan-500/10 px-3 py-2"
       >
-        <div className="flex space-x-2">
+        <div className="flex items-center space-x-2">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             const ActiveIcon = item.Icon;
@@ -74,22 +83,46 @@ const Navigation = ({ activeSection }: NavigationProps) => {
                 onClick={() => scrollToSection(item.id)}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className={`relative flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 group
-                  ${isActive 
-                    ? 'bg-cyan-500/15 text-cyan-400 shadow-lg shadow-cyan-500/20' 
-                    : 'text-gray-300 hover:bg-white/5 hover:text-white'
-                  }
-                `}
+                className={`relative flex items-center px-4 py-2 rounded-full text-sm font-medium 
+                            transition-all duration-300 group
+                  ${
+                    isActive
+                      ? 'bg-cyan-500/15 text-cyan-400 shadow-lg shadow-cyan-500/20'
+                      : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                  }`}
               >
-                <ActiveIcon size={16} className={`mr-2 transition-colors duration-300 ${isActive ? 'text-cyan-400' : 'text-gray-400 group-hover:text-white'}`} />
+                <ActiveIcon
+                  size={16}
+                  className={`mr-2 transition-colors duration-300 ${
+                    isActive ? 'text-cyan-400' : 'text-gray-400 group-hover:text-white'
+                  }`}
+                />
                 {item.label}
               </motion.button>
             );
           })}
+
+          {/* Divider inside dock */}
+          <span className="mx-1 h-6 w-px bg-white/10" />
+
+          {/* Resume Button (desktop) */}
+          <motion.a
+            href="/Vivek-Vardhan-Varkala-DevOps-Engineer.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center px-4 py-2 rounded-full text-sm font-semibold
+                       bg-cyan-500 text-slate-900 shadow-lg shadow-cyan-500/40
+                       hover:bg-cyan-400 transition-all duration-300"
+          >
+            <FileText size={16} className="mr-2" />
+            Resume
+          </motion.a>
         </div>
       </nav>
 
-      {/* 2. Mobile: Menu Button and Off-Canvas Sidebar */}
+      {/* Mobile: Menu Button */}
       <div className="fixed top-6 right-6 z-50 md:hidden">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -99,18 +132,17 @@ const Navigation = ({ activeSection }: NavigationProps) => {
         </button>
       </div>
 
+      {/* Mobile: Off-canvas Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          // Mobile Menu: Full-screen sidebar sliding in from the right
           <motion.div
-            // Variants are now correctly typed due to the 'as const' definition
-            variants={mobileMenuVariants as Variants} 
+            variants={mobileMenuVariants as Variants}
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-lg md:hidden"
+            className="fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-lg md:hidden flex flex-col"
           >
-            <div className="flex flex-col space-y-4 pt-24 px-8">
+            <div className="flex-1 flex flex-col space-y-4 pt-24 px-8">
               {navItems.map((item) => {
                 const isActive = activeSection === item.id;
                 const MobileIcon = item.Icon;
@@ -119,16 +151,32 @@ const Navigation = ({ activeSection }: NavigationProps) => {
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
                     className={`flex items-center text-xl font-medium p-3 rounded-lg transition-colors duration-200 text-left
-                      ${isActive 
-                        ? 'text-cyan-400 bg-cyan-400/10 border-l-4 border-cyan-400' 
-                        : 'text-gray-300 hover:text-white hover:bg-white/5'}
-                    `}
+                      ${
+                        isActive
+                          ? 'text-cyan-400 bg-cyan-400/10 border-l-4 border-cyan-400'
+                          : 'text-gray-300 hover:text-white hover:bg-white/5'
+                      }`}
                   >
                     <MobileIcon size={24} className="mr-4" />
                     {item.label}
                   </button>
                 );
               })}
+            </div>
+
+            {/* Resume Button (mobile, bottom) */}
+            <div className="px-8 pb-10">
+              <a
+                href="/Vivek-Vardhan-Varkala-DevOps-Engineer.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 
+                           rounded-full bg-cyan-500 text-slate-900 font-semibold text-lg
+                           shadow-xl shadow-cyan-500/40 hover:bg-cyan-400 transition-all duration-300"
+              >
+                <FileText size={22} />
+                View Resume
+              </a>
             </div>
           </motion.div>
         )}
