@@ -18,28 +18,32 @@ const Experience = () => {
 
   const projectsData = [
     {
-      title: 'Jio New Energy Platform',
-      period: 'Jan 2025 - Ongoing',
+      title: 'Real-Time Data Migration & Azure Infrastructure Automation',
+      period: 'Aug 2025 - Ongoing',
+      focus: 'Azure • Terraform • Streaming',
       description:
-        'Designed and deployed a cost-optimized, secure Databricks architecture by provisioning shared clusters with Unity Catalog across multiple workspaces. Integrated Azure Key Vault for secret management and implemented Databricks Asset Bundles (DAB) for CI/CD automation.'
+        'Architected and automated a highly scalable Azure data platform to support real-time, petabyte-scale data migration across 10+ business units. Built modular, reusable, and fully parameterized Terraform modules to provision Azure Event Hubs, ADF pipelines, ADLS Gen2, and self-hosted CI/CD agent pools with strict compliance and DR patterns. Standardized IaC workflows to enable consistent, repeatable environments and seamless multi-team onboarding.'
     },
     {
-      title: 'Real-Time High-Scale Data Migration',
-      period: 'Aug 2025 - Ongoing',
+      title: 'Databricks Deployment & Governance Automation (DAB)',
+      period: 'Jul 2025 - Ongoing',
+      focus: 'Databricks • CI/CD • Governance',
       description:
-        'Automated scalable Azure infrastructure using Infrastructure as Code (Terraform) to enable ingestion and processing of petabytes of data. Provisioned ADF, Event Hubs, ADLS, and CI/CD agent VMs across 10+ business units.'
+        'Architected a DAB-based CI/CD framework for Databricks, standardizing deployments across 10+ BUs and 3 environments. Delivered reusable templates, automated job/workflow promotions, and workspace-level configuration governance. Integrated Azure Key Vault for secure secret management and optimized cluster configurations for better cost and performance.'
     },
     {
       title: 'Scalable Orchestration Service Architecture',
-      period: 'May 2025 - Aug 2025',
+      period: 'May 2025 - July 2025',
+      focus: 'Airflow • HA • Orchestration',
       description:
         'Developed a high-availability Airflow architecture (API servers, schedulers, executors) with PCS-based auto-failover and remote logging, eliminating single points of failure.'
     },
     {
-      title: 'Reliance Foundation Hospital',
+      title: 'Kubernetes for ML Workloads',
       period: 'May 2024 - Aug 2024',
+      focus: 'Kubernetes • Istio • MLOps',
       description:
-        'Built a secure Kubernetes infrastructure alongside a Hadoop cluster to support ML-driven healthcare predictions. Developed and maintained image build pipeline with integrated security scanning.'
+        'Designed and deployed a secure, scalable Kubernetes platform to run high-performance ML inference workloads. Integrated Istio service mesh for traffic control, observability, and performance bottleneck analysis. Operationalized model inference using Seldon Core, enabling reliable and reproducible deployments. Built and maintained a hardened image-build pipeline with automated security scanning, dependency checks, and vulnerability reporting to ensure production-grade compliance.'
     }
   ];
 
@@ -153,25 +157,33 @@ const Experience = () => {
           </div>
         </motion.div>
 
-        {/* Notable Projects - Modern Alternating Timeline */}
+        {/* Notable Projects – upgraded, more "wow" */}
         <div className="mt-20">
-          <motion.h3
+          <motion.div
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
-            className="text-3xl font-bold text-white mb-10 text-center"
+            className="flex flex-col items-center gap-3 text-center mb-12"
           >
-            Notable Projects
-          </motion.h3>
+            <h3 className="text-3xl font-bold text-white">Notable Projects</h3>
+            <p className="max-w-2xl text-sm md:text-base text-slate-300">
+              A curated snapshot of the platforms, pipelines, and Kubernetes/Databricks
+              foundations I’ve helped build and scale.
+            </p>
+          </motion.div>
 
           <div className="relative max-w-4xl mx-auto">
-            {/* Center line for desktop */}
-            <div className="hidden md:block absolute left-1/2 top-0 -translate-x-1/2 h-full w-px bg-gradient-to-b from-cyan-500/60 via-slate-600 to-blue-500/60" />
+            {/* Center spine */}
+            <div className="hidden md:block absolute left-1/2 top-0 -translate-x-1/2 h-full w-px bg-gradient-to-b from-cyan-500/80 via-slate-600 to-blue-500/80" />
 
-            <div className="space-y-10 md:space-y-12">
+            <div className="space-y-12 md:space-y-14">
               {projectsData.map((project, index) => {
                 const isLeft = index % 2 === 0;
+                const projectNumber = String(index + 1).padStart(2, '0');
+                const focusTags = project.focus
+                  ? project.focus.split('•').map(tag => tag.trim())
+                  : [];
 
                 return (
                   <motion.div
@@ -180,22 +192,24 @@ const Experience = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.25 }}
-                    className={`relative flex md:items-center ${
+                    className={`relative flex md:items-stretch ${
                       isLeft ? 'md:justify-start' : 'md:justify-end'
                     }`}
                   >
-                    {/* Timeline dot */}
-                    <div
-                      className={`
-                        hidden md:flex absolute left-1/2 -translate-x-1/2 items-center justify-center 
-                        w-6 h-6 rounded-full bg-slate-900 border-2 border-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.7)]
-                      `}
-                    >
-                      <div className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
+                    {/* Timeline node */}
+                    <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center justify-center w-10 h-10 rounded-full bg-slate-900 border border-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.9)]">
+                      <span className="text-xs font-semibold text-cyan-200">
+                        {projectNumber}
+                      </span>
                     </div>
 
-                    {/* Connector line for mobile */}
+                    {/* Mobile vertical line & node */}
                     <div className="md:hidden absolute left-3 top-0 bottom-0 w-px bg-slate-700" />
+                    <div className="md:hidden absolute left-3 top-3 -translate-x-1/2 flex h-7 w-7 items-center justify-center rounded-full bg-slate-900 border border-cyan-400 shadow-[0_0_18px_rgba(34,211,238,0.8)]">
+                      <span className="text-[10px] font-semibold text-cyan-200">
+                        {projectNumber}
+                      </span>
+                    </div>
 
                     {/* Card */}
                     <div
@@ -204,25 +218,52 @@ const Experience = () => {
                         ${isLeft ? 'md:pr-10 md:text-right md:mr-4' : 'md:pl-10 md:text-left md:ml-4'}
                       `}
                     >
-                      {/* Mobile dot */}
-                      <div className="md:hidden absolute left-2 top-3 w-3 h-3 rounded-full bg-cyan-400 border-2 border-slate-900" />
+                      <div className="group relative bg-slate-900/85 border border-slate-700/70 rounded-2xl p-6 md:p-7 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/80 hover:shadow-[0_20px_50px_rgba(34,211,238,0.35)]">
+                        {/* Top gradient bar */}
+                        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 opacity-80" />
 
-                      <div className="bg-slate-800/80 border border-slate-700/70 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:border-cyan-500/70 transition-all duration-300">
-                        <div className="flex flex-col gap-2 md:gap-3">
+                        {/* Subtle gradient glow */}
+                        <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-cyan-500/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                        <div className="relative flex flex-col gap-3">
                           <div
-                            className={`flex items-center ${
-                              isLeft ? 'md:justify-end' : 'md:justify-start'
-                            } justify-between md:space-x-3`}
+                            className={`flex items-start justify-between gap-3 ${
+                              isLeft ? 'md:flex-row-reverse' : ''
+                            }`}
                           >
-                            <h4 className="text-lg md:text-xl font-bold text-white">
-                              {project.title}
-                            </h4>
-                            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-900/70 border border-cyan-400/50 text-xs text-cyan-200">
-                              <Clock size={14} />
+                            <div>
+                              <h4 className="text-lg md:text-xl font-bold text-white">
+                                {project.title}
+                              </h4>
+                              <p className="mt-1 text-[11px] font-medium uppercase tracking-wide text-slate-400">
+                                {project.focus}
+                              </p>
+                            </div>
+                            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-950/80 border border-cyan-400/60 text-[11px] text-cyan-200 whitespace-nowrap">
+                              <Clock size={13} />
                               {project.period}
                             </span>
                           </div>
-                          <p className="text-sm md:text-base text-slate-300 leading-relaxed">
+
+                          {/* Focus tags as chips */}
+                          {focusTags.length > 0 && (
+                            <div
+                              className={`flex flex-wrap gap-2 text-[11px] ${
+                                isLeft ? 'md:justify-end' : 'md:justify-start'
+                              }`}
+                            >
+                              {focusTags.map(tag => (
+                                <span
+                                  key={tag}
+                                  className="rounded-full bg-slate-800/80 border border-slate-600/70 px-2.5 py-1 text-slate-200"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+
+                          <p className="text-sm md:text-[15px] text-slate-200 leading-relaxed">
                             {project.description}
                           </p>
                         </div>
@@ -259,7 +300,11 @@ const Experience = () => {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  whileHover={{ scale: 1.03, y: -3, boxShadow: '0 18px 40px rgba(59,130,246,0.35)' }}
+                  whileHover={{
+                    scale: 1.03,
+                    y: -3,
+                    boxShadow: '0 18px 40px rgba(59,130,246,0.35)'
+                  }}
                   className="relative overflow-hidden rounded-xl border border-slate-600/70 bg-slate-800/80 p-4 flex flex-col gap-2"
                 >
                   <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500" />

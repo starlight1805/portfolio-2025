@@ -102,7 +102,7 @@ const About = () => {
             <p className="text-slate-700 font-semibold mb-1">DevOps Engineer</p>
             <p className="text-slate-600">Jio Platforms Ltd, Mumbai</p>
             <p className="text-slate-500 text-sm mt-2">
-              Aug 2023 - Present · 2.3 years
+              Aug 2023 - Present · 4 years
             </p>
           </motion.div>
 
@@ -120,7 +120,7 @@ const About = () => {
             Professional Summary
           </h3>
           <p className="text-slate-700 leading-relaxed mb-3 text-lg">
-            DevOps Engineer with <strong className="text-indigo-700">2.3+ years of hands-on experience</strong>{' '}
+            DevOps Engineer with <strong className="text-indigo-700">2.4+ years of hands-on experience</strong>{' '}
             designing, automating, and operating{' '}
             <strong className="text-blue-700">cloud-native, scalable platforms</strong> across Azure and
             on-premise environments. Specialized in Kubernetes, Terraform, and Databricks to deliver
