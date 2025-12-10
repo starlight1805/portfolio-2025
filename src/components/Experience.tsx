@@ -1,95 +1,106 @@
-import { CheckCircle2, Clock, Zap, Target, Briefcase } from 'lucide-react';
-import { motion, Variants } from 'framer-motion';
+import { CheckCircle2, Clock, Zap, Target, Briefcase, ArrowRight } from "lucide-react";
+import { motion, Variants } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Experience = () => {
   const responsibilities = [
-    'Orchestrating the full-cycle development and deployment of intricate systems within Azure and Hadoop ecosystems',
-    'Managed and optimized multiple Kubernetes clusters hosting diverse application and ML workloads, achieving 99.99% uptime',
-    'Integrated JFrog, SonarQube in CI/CD pipelines to enforce artifact governance, code quality, and security compliance',
-    'Configured and maintained Prometheus, Grafana, and Checkmk for real-time monitoring and telemetry visualization'
+    "Designing and operating cloud & on-prem infrastructure across Azure, Kubernetes and Hadoop.",
+    "Owning Kubernetes clusters for application and ML workloads with high availability SLAs.",
+    "Embedding observability with Prometheus, Grafana, Checkmk and structured alerting.",
   ];
 
   const achievements = [
-    'Reduced Databricks compute cost by 25% by enforcing cluster policies and optimizing job scheduling',
-    'Executed and scaled CI/CD pipelines achieving a 60% boost in deployment efficiency',
-    'Reduced idle compute by 30% through autoscaling with KEDA and Kafka metrics',
-    'Scaled secret management throughput beyond 20K RPS with high-availability HashiCorp Vault infrastructure'
+    "Cut Databricks compute cost by ~25% with cluster policies and job optimisations.",
+    "Improved deployment throughput using CI/CD pipelines, approvals and quality gates.",
+    "Built KEDA-based autoscaling using Kafka metrics to reduce idle compute.",
   ];
 
   const projectsData = [
     {
-      title: 'Real-Time Data Migration & Azure Infrastructure Automation',
-      period: 'Aug 2025 - Ongoing',
-      focus: 'Azure • Terraform • Streaming',
-      description:
-        'Architected and automated a highly scalable Azure data platform to support real-time, petabyte-scale data migration across 10+ business units. Built modular, reusable, and fully parameterized Terraform modules to provision Azure Event Hubs, ADF pipelines, ADLS Gen2, and self-hosted CI/CD agent pools with strict compliance and DR patterns. Standardized IaC workflows to enable consistent, repeatable environments and seamless multi-team onboarding.'
+      title: "Real-Time Data Migration & Azure Platform",
+      period: "Aug 2025 – Ongoing",
+      focus: ["Azure", "Terraform", "Streaming"],
+      summary:
+        "Automating a shared Azure data platform for multiple business units with reusable Terraform modules and real-time ingestion.",
+      route: "/azure-migration",
     },
     {
-      title: 'Databricks Deployment & Governance Automation (DAB)',
-      period: 'Jul 2025 - Ongoing',
-      focus: 'Databricks • CI/CD • Governance',
-      description:
-        'Architected a DAB-based CI/CD framework for Databricks, standardizing deployments across 10+ BUs and 3 environments. Delivered reusable templates, automated job/workflow promotions, and workspace-level configuration governance. Integrated Azure Key Vault for secure secret management and optimized cluster configurations for better cost and performance.'
+      title: "Databricks Deployment & Governance (DAB)",
+      period: "Jul 2025 – Ongoing",
+      focus: ["Databricks", "CI/CD", "Governance"],
+      summary:
+        "Standardised Databricks deployments across environments using DAB, with secure secrets and opinionated cluster templates.",
+      route: "/databricks-dab",
     },
     {
-      title: 'Scalable Orchestration Service Architecture',
-      period: 'May 2025 - July 2025',
-      focus: 'Airflow • HA • Orchestration',
-      description:
-        'Developed a high-availability Airflow architecture (API servers, schedulers, executors) with PCS-based auto-failover and remote logging, eliminating single points of failure.'
+      title: "Airflow HA Orchestration Service",
+      period: "May 2025 – Jul 2025",
+      focus: ["Airflow", "PCS", "HA"],
+      summary:
+        "Designed a no-SPOF Airflow control plane with PCS, HAProxy and edge executors for remote execution nodes.",
+      route: "/airflow-ha",
     },
     {
-      title: 'Kubernetes for ML Workloads',
-      period: 'May 2024 - Aug 2024',
-      focus: 'Kubernetes • Istio • MLOps',
-      description:
-        'Designed and deployed a secure, scalable Kubernetes platform to run high-performance ML inference workloads. Integrated Istio service mesh for traffic control, observability, and performance bottleneck analysis. Operationalized model inference using Seldon Core, enabling reliable and reproducible deployments. Built and maintained a hardened image-build pipeline with automated security scanning, dependency checks, and vulnerability reporting to ensure production-grade compliance.'
-    }
+      title: "Kubernetes Platform for ML Inference",
+      period: "May 2024 – Aug 2024",
+      focus: ["Kubernetes", "Istio", "MLOps"],
+      summary:
+        "Hardened K8s platform with mesh, Seldon Core and secure image build pipeline for production model serving.",
+      route: "/k8s-ml-platform",
+    },
+    {
+      title: "KEDA Kafka-Driven Autoscaling",
+      period: "Side Project",
+      focus: ["KEDA", "Kafka", "Jupyter"],
+      summary:
+        "Personal project implementing Kafka-lag-based autoscaling of Jupyter workloads with a single automation script.",
+      route: "/keda-architecture",
+    },
   ];
 
   const certifications = [
     {
-      name: 'Microsoft Certified: Azure Administrator Associate (AZ-104)',
-      provider: 'Microsoft',
-      status: 'Completed',
-      highlight: 'Core Azure administration & operations'
+      name: "Microsoft Certified: Azure Administrator Associate (AZ-104)",
+      provider: "Microsoft",
+      status: "Completed",
+      highlight: "Core Azure administration & operations",
     },
     {
-      name: 'Microsoft Certified: Azure Fundamentals (AZ-900)',
-      provider: 'Microsoft',
-      status: 'Completed',
-      highlight: 'Cloud fundamentals & Azure foundation'
+      name: "Microsoft Certified: Azure Fundamentals (AZ-900)",
+      provider: "Microsoft",
+      status: "Completed",
+      highlight: "Cloud fundamentals & Azure foundation",
     },
     {
-      name: 'Databricks Platform Administrator',
-      provider: 'Databricks',
-      status: 'Completed',
-      highlight: 'Lakehouse platform governance & operations'
+      name: "Databricks Platform Administrator",
+      provider: "Databricks",
+      status: "Completed",
+      highlight: "Lakehouse platform governance & operations",
     },
     {
-      name: 'Airflow Administrator',
-      provider: 'Apache Airflow',
-      status: 'Completed',
-      highlight: 'Workflow orchestration & scheduling at scale'
+      name: "Airflow Administrator",
+      provider: "Apache Airflow",
+      status: "Completed",
+      highlight: "Workflow orchestration & scheduling at scale",
     },
     {
-      name: 'Certified Kubernetes Administrator (CKA)',
-      provider: 'CNCF',
-      status: 'Scheduled',
-      examDate: 'January 2026',
+      name: "Certified Kubernetes Administrator (CKA)",
+      provider: "CNCF",
+      status: "Scheduled",
+      examDate: "January 2026",
       highlight:
-        'Registered candidate — actively preparing with focus on cluster ops, troubleshooting, networking & security'
-    }
+        "Registered candidate — focusing on cluster ops, troubleshooting, networking & security.",
+    },
   ];
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 18 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
   };
 
-  const projectItemVariants: Variants = {
-    hidden: { opacity: 0, y: 36 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } }
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
   };
 
   return (
@@ -101,178 +112,134 @@ const Experience = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          className="text-5xl font-extrabold text-center mb-16 font-sans tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500"
+          className="text-5xl font-extrabold text-center mb-10 font-sans tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500"
         >
           Professional Experience
         </motion.h2>
 
-        {/* Job Role */}
+        {/* Current role – compact */}
         <motion.div
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          whileHover={{ scale: 1.01, boxShadow: '0 20px 50px rgba(0,255,255,0.15)' }}
-          className="mb-16 bg-slate-800 p-10 rounded-2xl shadow-2xl border border-cyan-800/50"
+          className="mb-16 bg-slate-800/90 p-8 rounded-2xl shadow-2xl border border-slate-700/80"
         >
-          <div className="flex justify-between items-start mb-8 border-b border-slate-700/50 pb-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-slate-700/60 pb-4 mb-6">
             <div>
-              <h3 className="text-3xl font-bold text-white">DevOps Engineer</h3>
-              <p className="text-xl text-gray-400">Jio Platforms Ltd, Mumbai</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-white">DevOps Engineer</h3>
+              <p className="text-base md:text-lg text-gray-400">Jio Platforms Ltd · Mumbai</p>
             </div>
-            <span className="text-blue-400 font-semibold text-lg flex items-center">
-              <Briefcase size={20} className="mr-2" />
-              Aug 2023 - Present
+            <span className="inline-flex items-center gap-2 text-cyan-300 font-semibold text-sm md:text-base bg-slate-900/70 px-3 py-2 rounded-full border border-cyan-500/50">
+              <Briefcase size={18} />
+              Aug 2023 – Present
             </span>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+          <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h4 className="text-xl font-semibold text-cyan-400 mb-5 flex items-center">
-                <Target size={24} className="mr-3" /> Key Responsibilities
+              <h4 className="text-lg font-semibold text-cyan-400 mb-4 flex items-center">
+                <Target size={20} className="mr-2" /> Focus Areas
               </h4>
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 {responsibilities.map((item, index) => (
-                  <motion.li key={index} variants={itemVariants} className="flex items-start">
-                    <CheckCircle2 className="text-cyan-500 mr-3 flex-shrink-0 mt-1" size={20} />
-                    <span className="text-gray-300 font-light">{item}</span>
-                  </motion.li>
+                  <li key={index} className="flex items-start text-sm text-gray-200">
+                    <CheckCircle2 className="text-cyan-400 mr-3 flex-shrink-0 mt-0.5" size={18} />
+                    <span>{item}</span>
+                  </li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <h4 className="text-xl font-semibold text-blue-400 mb-5 flex items-center">
-                <Zap size={24} className="mr-3" /> Key Achievements
+              <h4 className="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+                <Zap size={20} className="mr-2" /> Impact Highlights
               </h4>
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 {achievements.map((item, index) => (
-                  <motion.li key={index} variants={itemVariants} className="flex items-start">
-                    <CheckCircle2 className="text-blue-500 mr-3 flex-shrink-0 mt-1" size={20} />
-                    <span className="text-gray-300 font-light">{item}</span>
-                  </motion.li>
+                  <li key={index} className="flex items-start text-sm text-gray-200">
+                    <CheckCircle2 className="text-blue-400 mr-3 flex-shrink-0 mt-0.5" size={18} />
+                    <span>{item}</span>
+                  </li>
                 ))}
               </ul>
             </div>
           </div>
         </motion.div>
 
-        {/* Notable Projects – upgraded, more "wow" */}
-        <div className="mt-20">
+        {/* Key Projects – simple grid with case-study buttons */}
+        <div className="mt-10">
           <motion.div
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
-            className="flex flex-col items-center gap-3 text-center mb-12"
+            className="flex flex-col items-center gap-2 text-center mb-10"
           >
-            <h3 className="text-3xl font-bold text-white">Notable Projects</h3>
+            <h3 className="text-3xl font-bold text-white">Key Platforms & Projects</h3>
             <p className="max-w-2xl text-sm md:text-base text-slate-300">
-              A curated snapshot of the platforms, pipelines, and Kubernetes/Databricks
-              foundations I’ve helped build and scale.
+              A quick overview of the things I&apos;ve actually built. Click into a project
+              if you want the deeper architecture view.
             </p>
           </motion.div>
 
-          <div className="relative max-w-4xl mx-auto">
-            {/* Center spine */}
-            <div className="hidden md:block absolute left-1/2 top-0 -translate-x-1/2 h-full w-px bg-gradient-to-b from-cyan-500/80 via-slate-600 to-blue-500/80" />
+          <div className="grid gap-8 md:grid-cols-2">
+            {projectsData.map((project, index) => (
+              <motion.div
+                key={project.title}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                whileHover={{
+                  scale: 1.02,
+                  y: -3,
+                  boxShadow: "0 22px 60px rgba(15,23,42,0.85)",
+                }}
+                className="relative flex flex-col justify-between rounded-2xl border border-slate-700/80 bg-slate-900/90 p-6 shadow-xl transition-all"
+              >
+                {/* top accent line */}
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500" />
 
-            <div className="space-y-12 md:space-y-14">
-              {projectsData.map((project, index) => {
-                const isLeft = index % 2 === 0;
-                const projectNumber = String(index + 1).padStart(2, '0');
-                const focusTags = project.focus
-                  ? project.focus.split('•').map(tag => tag.trim())
-                  : [];
-
-                return (
-                  <motion.div
-                    key={index}
-                    variants={projectItemVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.25 }}
-                    className={`relative flex md:items-stretch ${
-                      isLeft ? 'md:justify-start' : 'md:justify-end'
-                    }`}
-                  >
-                    {/* Timeline node */}
-                    <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center justify-center w-10 h-10 rounded-full bg-slate-900 border border-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.9)]">
-                      <span className="text-xs font-semibold text-cyan-200">
-                        {projectNumber}
-                      </span>
-                    </div>
-
-                    {/* Mobile vertical line & node */}
-                    <div className="md:hidden absolute left-3 top-0 bottom-0 w-px bg-slate-700" />
-                    <div className="md:hidden absolute left-3 top-3 -translate-x-1/2 flex h-7 w-7 items-center justify-center rounded-full bg-slate-900 border border-cyan-400 shadow-[0_0_18px_rgba(34,211,238,0.8)]">
-                      <span className="text-[10px] font-semibold text-cyan-200">
-                        {projectNumber}
-                      </span>
-                    </div>
-
-                    {/* Card */}
-                    <div
-                      className={`
-                        relative w-full md:w-1/2 
-                        ${isLeft ? 'md:pr-10 md:text-right md:mr-4' : 'md:pl-10 md:text-left md:ml-4'}
-                      `}
-                    >
-                      <div className="group relative bg-slate-900/85 border border-slate-700/70 rounded-2xl p-6 md:p-7 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/80 hover:shadow-[0_20px_50px_rgba(34,211,238,0.35)]">
-                        {/* Top gradient bar */}
-                        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 opacity-80" />
-
-                        {/* Subtle gradient glow */}
-                        <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-cyan-500/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-                        <div className="relative flex flex-col gap-3">
-                          <div
-                            className={`flex items-start justify-between gap-3 ${
-                              isLeft ? 'md:flex-row-reverse' : ''
-                            }`}
+                <div className="relative space-y-3 mb-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h4 className="text-lg font-semibold text-slate-50">
+                        {project.title}
+                      </h4>
+                      <div className="mt-1 flex flex-wrap gap-1.5 text-[11px] text-slate-300">
+                        {project.focus.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full bg-slate-800/80 border border-slate-600/80 px-2 py-0.5"
                           >
-                            <div>
-                              <h4 className="text-lg md:text-xl font-bold text-white">
-                                {project.title}
-                              </h4>
-                              <p className="mt-1 text-[11px] font-medium uppercase tracking-wide text-slate-400">
-                                {project.focus}
-                              </p>
-                            </div>
-                            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-950/80 border border-cyan-400/60 text-[11px] text-cyan-200 whitespace-nowrap">
-                              <Clock size={13} />
-                              {project.period}
-                            </span>
-                          </div>
-
-                          {/* Focus tags as chips */}
-                          {focusTags.length > 0 && (
-                            <div
-                              className={`flex flex-wrap gap-2 text-[11px] ${
-                                isLeft ? 'md:justify-end' : 'md:justify-start'
-                              }`}
-                            >
-                              {focusTags.map(tag => (
-                                <span
-                                  key={tag}
-                                  className="rounded-full bg-slate-800/80 border border-slate-600/70 px-2.5 py-1 text-slate-200"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-
-                          <p className="text-sm md:text-[15px] text-slate-200 leading-relaxed">
-                            {project.description}
-                          </p>
-                        </div>
+                            {tag}
+                          </span>
+                        ))}
                       </div>
                     </div>
-                  </motion.div>
-                );
-              })}
-            </div>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-950/80 border border-slate-600/80 px-3 py-1 text-[11px] text-slate-200 whitespace-nowrap">
+                      <Clock size={12} />
+                      {project.period}
+                    </span>
+                  </div>
+
+                  <p className="text-sm text-slate-200 leading-relaxed">
+                    {project.summary}
+                  </p>
+                </div>
+
+                <div className="relative flex justify-end">
+                  <Link
+                    to={project.route}
+                    className="inline-flex items-center gap-2 rounded-full bg-cyan-500/90 px-4 py-2 text-xs font-semibold text-slate-900 shadow-md hover:bg-cyan-400 transition-colors"
+                  >
+                    View case study
+                    <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
 
@@ -285,13 +252,13 @@ const Experience = () => {
             viewport={{ once: true, amount: 0.15 }}
             className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-10 rounded-2xl border border-blue-600/40 shadow-2xl shadow-blue-900/40"
           >
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-              <h3 className="text-3xl font-bold text-blue-400 mb-3 md:mb-0">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-3">
+              <h3 className="text-3xl font-bold text-blue-400 mb-1 md:mb-0">
                 Certifications & Learning
               </h3>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/40 text-blue-200 text-sm font-medium">
                 <Zap size={16} />
-                Continuously upskilling in cloud & Kubernetes
+                Keeping skills sharp for cloud & Kubernetes
               </span>
             </div>
 
@@ -303,7 +270,7 @@ const Experience = () => {
                   whileHover={{
                     scale: 1.03,
                     y: -3,
-                    boxShadow: '0 18px 40px rgba(59,130,246,0.35)'
+                    boxShadow: "0 18px 40px rgba(59,130,246,0.35)",
                   }}
                   className="relative overflow-hidden rounded-xl border border-slate-600/70 bg-slate-800/80 p-4 flex flex-col gap-2"
                 >
@@ -319,15 +286,14 @@ const Experience = () => {
                       </h4>
                     </div>
 
-                    {/* Status badges */}
                     <div className="flex-shrink-0">
-                      {cert.status === 'Completed' && (
+                      {cert.status === "Completed" && (
                         <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/60 text-emerald-300 text-[11px] font-semibold">
                           <CheckCircle2 size={12} /> Completed
                         </span>
                       )}
 
-                      {cert.status === 'Scheduled' && (
+                      {cert.status === "Scheduled" && (
                         <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-blue-500/15 border border-blue-400/60 text-blue-300 text-[11px] font-semibold">
                           <Clock size={12} /> Exam — {cert.examDate}
                         </span>
@@ -337,8 +303,7 @@ const Experience = () => {
 
                   <p className="text-xs text-slate-300/80 mt-1">{cert.highlight}</p>
 
-                  {/* CKA Progress Bar */}
-                  {cert.status === 'Scheduled' && (
+                  {cert.status === "Scheduled" && (
                     <div className="mt-3">
                       <div className="h-1.5 w-full bg-slate-700/60 rounded-full overflow-hidden">
                         <div className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 w-[70%]" />
