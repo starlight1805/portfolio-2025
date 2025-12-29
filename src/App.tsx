@@ -13,6 +13,7 @@ import KedaArchitecturePage from './components/KedaArchitecturePage';
 import AzureMigrationPage from "./components/Projects/AzureMigrationPage";
 import DatabricksDabPage from "./components/Projects/DatabricksDabPage";
 import KubernetesMlPlatformPage from "./components/Projects/KubernetesMlPlatformPage";
+import Productivity from "./components/Productivity";
 
 
 /**
@@ -86,6 +87,7 @@ function App() {
       <Route path="/azure-migration" element={<AzureMigrationPage />} />
       <Route path="/databricks-dab" element={<DatabricksDabPage />} />
       <Route path="/k8s-ml-platform" element={<KubernetesMlPlatformPage />} />
+      <Route path="/productivity" element={<Productivity />} />
     </Routes>
   );
 }

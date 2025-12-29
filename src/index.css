@@ -2,6 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Page animation */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-page {
+  animation: pageIn 0.6s ease-out;
+}
+
+/* Glass cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  transition: all 0.3s ease;
+}
+.glass-card:hover {
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.12);
+}
+
+/* Selects */
+.select-glass {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 0.75rem;
+  padding: 6px 12px;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+.select-glass:hover {
+  background: rgba(255,255,255,0.9);
+}
+
+/* Goal input */
+.goal-input {
+  width: 64px;
+  padding: 4px 6px;
+  border-radius: 0.5rem;
+  border: 1px solid #cbd5e1;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+.goal-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+
+/* Checkbox */
+.checkbox-animate {
+  width: 16px;
+  height: 16px;
+  accent-color: #22c55e;
+  transition: transform 0.15s ease;
+}
+.checkbox-animate:hover {
+  transform: scale(1.2);
+}
+
+/* Progress bars */
+.progress-track {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  transition: width 0.8s ease;
+}
+
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
